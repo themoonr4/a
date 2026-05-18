@@ -1,0 +1,35 @@
+'use client'
+
+import { Flame, TrendingUp, Eye } from 'lucide-react'
+
+const trendingItems = [
+  { rank: 1, title: "AI Revolution: What's Next?", views: "127K", trend: "+45%" },
+  { rank: 2, title: "Mars Mission Success", views: "89K", trend: "+32%" },
+  { rank: 3, title: "Climate Summit 2026", views: "76K", trend: "+28%" },
+]
+
+export function TrendingSidebar() {
+  return (
+    <div className="rounded-xl bg-moon-card moon-border overflow-hidden sticky top-24">
+      <div className="p-4 border-b border-moon-border">
+        <div className="flex items-center gap-2"><Flame className="w-5 h-5 text-orange-500" /><h3 className="font-bold">Trending Now</h3></div>
+      </div>
+      <div className="divide-y divide-moon-border">
+        {trendingItems.map((item) => (
+          <div key={item.rank} className="p-4 hover:bg-white/5 transition-colors cursor-pointer">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 rounded-full bg-moon-blue/20 flex items-center justify-center font-bold text-moon-blue">{item.rank}</div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-sm mb-1">{item.title}</h4>
+                <div className="flex items-center gap-3 text-xs text-moon-gray">
+                  <span className="flex items-center gap-1"><Eye className="w-3 h-3" />{item.views}</span>
+                  <span className="text-green-500">{item.trend}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
