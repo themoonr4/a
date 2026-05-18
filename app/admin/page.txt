@@ -1,0 +1,30 @@
+'use client'
+
+import { LayoutDashboard, Newspaper, Users, TrendingUp, Eye, MessageCircle, Share2 } from 'lucide-react'
+
+export default function AdminDashboard() {
+  const stats = [
+    { label: 'Total Articles', value: '147', change: '+12%', icon: Newspaper, color: 'text-blue-500' },
+    { label: 'Total Views', value: '2.4M', change: '+23%', icon: Eye, color: 'text-green-500' },
+    { label: 'Total Users', value: '8,234', change: '+18%', icon: Users, color: 'text-purple-500' },
+    { label: 'Engagement', value: '67%', change: '+5%', icon: TrendingUp, color: 'text-orange-500' },
+  ]
+
+  return (
+    <div className="container-custom py-8">
+      <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {stats.map((stat) => (
+          <div key={stat.label} className="rounded-xl bg-moon-card moon-border p-4">
+            <div className="flex items-center justify-between mb-3">
+              <stat.icon className={`w-5 h-5 ${stat.color}`} />
+              <span className="text-xs text-green-500">{stat.change}</span>
+            </div>
+            <div className="text-2xl font-bold">{stat.value}</div>
+            <div className="text-sm text-moon-gray">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
