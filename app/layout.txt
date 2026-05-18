@@ -1,0 +1,35 @@
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Navigation } from '@/components/layout/Navigation'
+import { BreakingTicker } from '@/components/news/BreakingTicker'
+import { MobileNav } from '@/components/ui/MobileNav'
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: {
+    default: 'THE MOON — Truth. Clarity. Light.',
+    template: '%s | THE MOON'
+  },
+  description: 'Premium news platform delivering truth with clarity and light.',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+        <Navigation />
+        <BreakingTicker />
+        <main className="min-h-screen pt-32 pb-20 md:pb-0">
+          {children}
+        </main>
+        <MobileNav />
+      </body>
+    </html>
+  )
+}
