@@ -1,0 +1,47 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { HeroCarousel } from '@/components/news/HeroCarousel'
+import { LatestStories } from '@/components/news/LatestStories'
+import { TrendingSidebar } from '@/components/news/TrendingSidebar'
+import { ForYouSection } from '@/components/news/ForYouSection'
+import { NewsletterModal } from '@/components/ui/NewsletterModal'
+
+export default function Home() {
+  const [showNewsletter, setShowNewsletter] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const hasSeen = localStorage.getItem('hasSeenNewsletter')
+      if (!hasSeen) {
+        setShowNewsletter(true)
+        localStorage.setItem('hasSeenNewsletter', 'true')
+      }
+    }, 15000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  return (
+    <>
+      <div className="container-custom py-8">
+        <section className="mb-12">
+          <HeroCarousel />
+        </section>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-12">
+            <LatestStories />
+            <ForYouSection />
+          </div>
+          <div className="lg:col-span-1">
+            <TrendingSidebar />
+          </div>
+        </div>
+      </div>
+
+      {showNewsletter && (
+        <NewsletterModal onClose={() => setShowNewsletter(false)} />
+      )}
+    </>
+  )
+}
