@@ -1,0 +1,34 @@
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Home, Compass, Bookmark, User, Zap } from 'lucide-react'
+
+const mobileItems = [
+  { icon: Home, label: 'Home', href: '/' },
+  { icon: Compass, label: 'Discover', href: '/discover' },
+  { icon: Zap, label: 'Live', href: '/live' },
+  { icon: Bookmark, label: 'Saved', href: '/saved' },
+  { icon: User, label: 'Profile', href: '/profile' },
+]
+
+export function MobileNav() {
+  const pathname = usePathname()
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-moon-dark/95 backdrop-blur-xl border-t border-moon-border md:hidden">
+      <div className="flex items-center justify-around px-4 py-2">
+        {mobileItems.map((item) => {
+          const isActive = pathname === item.href
+          return (
+            <Link key={item.href} href={item.href}
+              className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-all ${isActive ? 'text-moon-blue' : 'text-moon-gray hover:text-white'}`}>
+              <item.icon className="w-5 h-5" />
+              <span className="text-[10px] font-medium">{item.label}</span>
+              {isActive && <div className="absolute bottom-0 w-8 h-0.5 bg-moon-blue rounded-full" />}
+            </Link>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
