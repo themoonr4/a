@@ -1,0 +1,26 @@
+'use client'
+
+import { StoryCard } from './StoryCard'
+
+const sampleArticles = [
+  { id: "1", title: "Quantum Computing Breakthrough", excerpt: "Scientists achieve quantum supremacy.",
+    coverImage: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb", slug: "quantum", category: "Science",
+    views: 15420, publishedAt: new Date().toISOString(), author: { name: "Dr. Emily Watson" } },
+  { id: "2", title: "AI Revolution: The Future", excerpt: "How AI is reshaping industries.",
+    coverImage: "https://images.unsplash.com/photo-1677442136019-21780ecad995", slug: "ai-future", category: "Technology",
+    views: 12340, publishedAt: new Date(Date.now() - 2 * 3600000).toISOString(), author: { name: "Sarah Johnson" } },
+]
+
+export function LatestStories() {
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold">Latest Stories</h2>
+        <button className="text-moon-blue text-sm">View All →</button>
+      </div>
+      <div className="grid gap-6 md:grid-cols-2">
+        {sampleArticles.map((article) => (<StoryCard key={article.id} article={article} />))}
+      </div>
+    </div>
+  )
+}
