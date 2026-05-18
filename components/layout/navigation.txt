@@ -1,0 +1,60 @@
+'use client'
+
+import Link from 'next/link'
+import { useState } from 'react'
+import { Search, Menu, X } from 'lucide-react'
+
+export function Navigation() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  return (
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-moon-dark/95 backdrop-blur-xl border-b border-moon-border">
+        <div className="container-custom">
+          <div className="flex items-center justify-between h-16">
+            <Link href="/" className="flex items-baseline gap-1 group">
+              <span className="text-2xl group-hover:animate-float">🌙</span>
+              <span className="text-xl font-bold">THE<span className="text-moon-blue">MOON</span></span>
+            </Link>
+
+            <div className="hidden md:flex items-center gap-6">
+              {['Home', 'World', 'Tech', 'Science'].map((item) => (
+                <Link key={item} href={item === 'Home' ? '/' : `/category/${item.toLowerCase()}`}
+                  className="text-sm text-moon-gray hover:text-moon-blue transition-colors">
+                  {item}
+                </Link>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button className="p-2 rounded-full hover:bg-white/10"><Search className="w-5 h-5" /></button>
+              <button className="hidden md:block px-4 py-2 rounded-full bg-moon-blue text-black font-medium text-sm">
+                Sign In
+              </button>
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-full hover:bg-white/10">
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-moon-dark pt-16 px-4 md:hidden animate-slide-up">
+          <div className="flex flex-col gap-4 mt-8">
+            {['Home', 'World', 'Tech', 'Science'].map((item) => (
+              <Link key={item} href={item === 'Home' ? '/' : `/category/${item.toLowerCase()}`}
+                className="text-lg py-3 border-b border-moon-border hover:text-moon-blue"
+                onClick={() => setMobileMenuOpen(false)}>
+                {item}
+              </Link>
+            ))}
+            <button className="mt-4 px-6 py-3 rounded-full bg-moon-blue text-black font-semibold">
+              Sign In
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
